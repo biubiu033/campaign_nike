@@ -1,0 +1,547 @@
+@font-face {
+    font-family: 'fornike365';
+    src: url('../font/tradegothicfornike365-bdcn.eot');
+    src: local('☺'), url('../font/tradegothicfornike365-bdcn.woff') format('woff'), url('../font/tradegothicfornike365-bdcn.ttf') format('truetype'), url('../font/tradegothicfornike365-bdcn.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    position: relative;
+    margin: 0 0;
+    font-family: "STHeiti SC";
+}
+.wrap{
+    margin: 0 auto;
+    width: 26.66666666rem;
+}
+.main[name="index"]{
+    background: url("../img/bg.png")no-repeat;
+    background-size: contain;
+    height: 45.2rem;
+    font-size: 1.1rem;
+   /* font-family: "STHeiti SC";*/
+}
+.main[name="index"] a{
+    display: block;
+}
+.main[name="index"] a.aboutus{
+    background: url(../img/aboutus-btn.png)no-repeat;
+    background-size: contain;
+    height: 2.5rem;
+    width: 6.8rem;
+    position: absolute;
+    top: 26px;
+    left: 245px;
+    color: #ffffff;
+    text-align: center;
+    padding-top: 0.18rem;
+}
+.main[name="index"] a.theme{
+    position: relative;
+    height: 3.2rem;
+    width:100%;
+    transform: skew(00deg,-40deg) scale(1,6.5);
+}
+.main[name="index"] a.public{
+    position: relative;
+    top: 16.5rem;
+    height: 2.8rem;
+    width: 100%;
+    transform: skew(00deg,-40deg) scale(1,6.5);
+}
+.main[name="index"] a.ranking{
+    position: relative;
+    top: 24rem;
+    height: 23rem;
+    width: 100%;
+    transform: skew(00deg,-40deg)scale(1,1);
+}
+
+.join[name="join"] {
+    background: url(../img/bg.png) no-repeat;
+    background-size: cover;
+    min-height: 44.3rem;
+    /*font-family: "STHeiti SC";*/
+    box-sizing: border-box;
+    padding: 1rem 2.5rem 1rem;
+    overflow-x: hidden;
+}
+.join[name="join"] .title {
+    background: url(../img/join-title.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0 auto;
+    height: 7rem;
+    width: 23rem;
+}
+.projrct_title {
+    background: url(../img/join-title.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0 auto;
+    height: 7rem;
+    width: 23.4rem;
+}
+
+.join[name="join"] .join-input {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #fa6810;
+    box-shadow: 4px 4px #fa6810;
+    margin: 0.6rem auto;
+    box-sizing: border-box;
+    padding: 1rem 2rem 0.5rem;
+}
+
+.join[name="join"] .team {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.join[name="join"] .team .select_ul {
+    display: none;
+    position: absolute;
+    background: #fa6810;
+    color: #fff;
+    width: 100%;
+    left: 0;
+    top:5.5rem;
+   /* bottom: -5.2rem;*/
+    padding: 0.5rem 1.5rem;
+    box-sizing: border-box;
+    z-index: 1;
+    font-size: 0.8rem;
+}
+
+.join[name="join"] .team ul li {
+    padding: 0.2rem 0;
+}
+
+.join[name="join"] .team ul li:not(:last-child) {
+    border-bottom: 1px solid #fff;
+}
+
+.join[name="join"] h1 {
+    text-align: center;
+    font-size: 1rem;
+    /*font-weight: bold;*/
+    line-height: 1rem;
+    font-style: oblique;
+    color: #fa6b0e;
+}
+
+.join[name="join"] h1 span {
+    font-size: 0.7rem;
+    font-family: 'fornike365';
+    font-weight: 100;
+}
+
+.join[name="join"] .team-code, .employee-code {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid #fa6810;
+    padding: 0.65rem;
+    margin-top: 0.5rem;
+    box-sizing: border-box;
+}
+
+.join[name="join"] input {
+    display: block;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1.0rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #fa6710;
+    opacity: 0.5;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.down-icon:after {
+    content: '';
+    display: block;
+    background: url(../img/icon-down.png) center center no-repeat;
+    background-size: contain;
+    width: 1rem;
+    height: 1rem;
+}
+
+.join[name="join"] .warn {
+    text-align: center;
+    color: #fa6b0e;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+.join[name="join"] .compete {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1rem;
+    /*font-family: "STHeiti SC";*/
+    margin: 0 auto;
+    padding: 0.5rem 0 0.1rem;
+    width: 10rem;
+    border-radius: 10px;
+    border: 2px solid #e1520a;
+    box-shadow: 2px 2px #e1520a;
+    text-align: center;
+    color: #fa6b0e;
+    font-style: oblique;
+}
+
+.join[name="join"] .compete span {
+    font-size: 0.8rem;
+    font-family: 'fornike365'; ;
+    /*   font-weight: 100;*/
+}
+
+.bind[name="bind"]{
+    background: url(../img/bg.png)no-repeat;
+    background-size: cover;
+    min-height: 43.3rem;
+   /* font-family: "STHeiti SC";*/
+    box-sizing: border-box;
+    padding: 4.7rem 1rem;
+}
+.bind[name="bind"] .title{
+    background: url(../img/join-title.png)no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0 auto;
+    height: 7rem;
+    width: 23.4rem;
+}
+.bind[name="bind"] .bind-input{
+    background: url(../img/join-form-bg.png)no-repeat;
+    background-size: 24.4rem 13rem;
+    margin: 1.8rem auto;
+    height: 13rem;
+    width: 24.4rem;
+    box-sizing: border-box;
+    padding: 2.5rem 1.9rem 1.6rem;
+}
+.bind[name="bind"] .employee{
+    margin-top: 1rem;
+}
+
+.bind[name="bind"] h1{
+    text-align: center;
+    font-size:1rem;
+   /* font-weight: bold;*/
+    line-height: 1rem;
+    font-style: oblique;
+    color: #fa6b0e;
+}
+.bind[name="bind"] h1 span{
+    font-size: 0.7rem;
+    font-family: 'fornike365';
+    font-weight: 100;
+}
+.bind[name="bind"] .team-code ,.employee-code{
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid #fa6710;
+    padding: 0.65rem;
+    margin-top: 0.5rem;
+}
+.bind[name="bind"] input{
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1.0rem;
+}
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: #fa6710;
+    opacity: 0.5;
+    font-size: 1rem;
+}
+.input-icon:before{
+    content: '';
+    display: inline-block;
+    background: url(../img/input-icon.png) center center no-repeat;
+    background-size: contain;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0 0.4rem -0.28rem 0;
+}
+.bind[name="bind"] .warn{
+    text-align: center;
+    color: #fa6b0e;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+.bind[name="bind"] .compete{
+    display: block;
+    background: url("../img/compete-btn-bg.png")no-repeat;
+    background-size: contain;
+    height: 3.8rem;
+    line-height: 1.0rem;
+    width: 14rem;
+    font-weight: bold;
+    font-size: 1.3rem;
+    /*font-family: "STHeiti SC";*/
+    margin: 0 auto;
+    text-align: center;
+    color: #fa6b0e;
+    font-style: oblique;
+    box-sizing: border-box;
+    padding-top: 0.9rem;
+}
+.bind[name="bind"] .compete span{
+    font-size: 0.8rem;
+    font-family: 'fornike365';
+    /*   font-weight: 100;*/
+}
+/*获奖弹框*/
+.celebrate{
+    padding: 1rem;
+    margin:2rem auto 0;
+    background: rgba(255,255,255,1);
+    box-shadow: 5px 5px 0 rgba(250, 106, 6, 0.9);
+    box-sizing: border-box;
+    width: 22rem;
+    text-align: center;
+}
+.celebrate .close{
+    display: block;
+    background: url("../img/close-btn.png")no-repeat;
+    background-size: cover;
+    height: 1.8rem;
+    width: 1.8rem;
+    margin-left: 18rem;
+}
+.celebrate p{
+    margin: 0.4rem auto 1rem;
+   /* font-family: "STHeiti SC";*/
+    display: block;
+    font-size: 1.2rem;
+    text-align: center;
+    color: #f76a0e;
+    font-weight: bold;
+    line-height: 1.0rem;
+}
+.celebrate p span{
+    font-family: 'fornike365';
+    font-size: 0.65rem;
+    font-weight: 100;
+}
+.celebrate .img-bg{
+    display: block;
+    background-image: url("../img/img-bg.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    height: 9.3rem;
+    width: auto;
+    text-align: center;
+}
+.celebrate h1{
+   /* font-family: "STHeiti SC";*/
+    font-weight: bold;
+    color: #f76a0e;
+    line-height: 1.2rem;
+    margin-top: 1.5rem;
+}
+.celebrate h1 span{
+    font-family: 'fornike365';
+    font-size: 0.65rem;
+    font-weight: 100;
+    border-bottom: 2px solid #f76a0e;
+}
+/*.foot{
+    z-index: 9999;
+    width: 100%;
+    text-align: center;
+    margin-top: -3.5rem;
+}*/
+.foot-a{
+    text-align: center;
+    display: inline-block!important;
+    font-size: 0.9rem;
+    color: #c54c0f;
+    line-height: 0.9rem;
+}
+.foot-span{
+    font-size: 0.7rem;
+    font-family: 'fornike365';
+}
+
+.join-chose[name="join-chose"]{
+    background: url(../img/bg.png)no-repeat;
+    background-size: cover;
+    min-height: 43.8rem;
+    /*font-family: "STHeiti SC";*/
+    box-sizing: border-box;
+    padding: 3rem 1rem 1rem;
+}
+.join-chose[name="join-chose"] .title{
+    background: url(../img/join-title.png)no-repeat;
+    background-size: contain;
+    background-position: center;
+    margin: 0 auto;
+    height: 7rem;
+    width: 23.4rem;
+    margin: 0 0 0 1rem;
+}
+.join-chose[name="join-chose"] img{
+    margin-top: 1.8rem;
+}
+/*队长命名*/
+.nominate[name="nominate"]{
+    background: url(../img/bg.png)no-repeat;
+    background-size: cover;
+    min-height: 43.3rem;
+   /* font-family: "STHeiti SC";*/
+    box-sizing: border-box;
+    padding: 3.6rem 1rem;
+}
+.nominate[name="nominate"] .join-input {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #fa6810;
+    box-shadow: 4px 4px #fa6810;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    padding: 2rem 2rem 0;
+}
+.nominate[name="nominate"] h1 {
+    text-align: center;
+    font-size: 1.3rem;
+  /*  font-weight: bold;*/
+    line-height: 1.8rem;
+    font-style: oblique;
+    color: #fa6b0e;
+    letter-spacing: 3px;
+}
+
+.nominate[name="nominate"] p{
+    text-align: center;
+    color: #fa6b0e;
+    font-family: 'fornike365';
+    font-weight: 100;
+    font-style: oblique;
+    letter-spacing: 4px;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.nominate[name="nominate"] .team-code{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.4);
+    border: 2px solid #fa6810;
+    padding: 0.65rem;
+    margin-top: 1.5rem;
+    box-sizing: border-box;
+}
+.nominate[name="nominate"] input {
+    display: block;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1.0rem;
+    /* text-align: center; */
+    width: 100%;
+    box-sizing: border-box;
+}
+.btn-style {
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+ /*   font-family: "STHeiti SC";*/
+    margin: 4rem auto 0;
+    padding: 0.5rem 0 0.1rem;
+    width: 14rem;
+    border-radius: 10px;
+    border: 2px solid #e1520a;
+    box-shadow: 2px 2px #e1520a;
+    text-align: center;
+    color: #fa6b0e;
+    font-style: oblique;
+}
+.btn-style span {
+    font-size: 0.8rem;
+    font-weight: 100;
+    font-family: 'fornike365';
+}
+.box{
+    width: 23rem;
+    text-align: center;
+    margin: 5rem auto 0;
+}
+.box p{
+    color: #ffffff;
+    font-style: normal;
+   /* font-family: "STHeiti SC";*/
+    font-size: 1.2rem;
+    line-height: 1.6rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+.btn-box{
+    display: flex;
+}
+.btn-box a{
+    display: inline-block;
+    background: rgba(255, 255, 255, 1);
+    width: 7rem;
+    height: 2rem;
+    margin-top: 3rem;
+    line-height: 0.9rem;
+    font-size: 0.9rem;
+    letter-spacing: 6px;
+    border-radius: 12px;
+}
+.btn-box a span{
+    font-size: 0.7rem;
+    letter-spacing: 0;
+}
+.dialog{
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.dialog__hd {
+    padding: 1.3em 1.6em .5em;
+}
+.dialog__bd {
+    padding: 0 1.6em .8em;
+    min-height: 40px;
+    font-size: 15px;
+    line-height: 1.3;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: #999;
+}
+.dialog__ft {
+    position: relative;
+    line-height: 48px;
+    font-size: 18px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.dialog__btn {
+    display: block;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+    color: #3cc51f;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    border-top: 1px solid #d2d2d2;
+    position: relative;
+}

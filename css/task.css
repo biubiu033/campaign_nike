@@ -1,0 +1,181 @@
+@font-face {
+    font-family: 'fornike365';
+    src: url('../font/tradegothicfornike365-bdcn.eot');
+    src: local('☺'), url('../font/tradegothicfornike365-bdcn.woff') format('woff'), url('../font/tradegothicfornike365-bdcn.ttf') format('truetype'), url('../font/tradegothicfornike365-bdcn.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    background: #fe8c03;
+}
+.theme-run-heros {
+    background:url(../img/bg.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 43.0rem;
+}
+.title{
+    padding: 3.2rem 1.5rem 1.5rem;
+    background: rgba(250, 107, 14, 0.8);
+    box-shadow: 0 5px 0 #ef4004;
+    text-align: center;
+}
+.home{
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+}
+.content{
+    background: rgba(250, 110, 13, 0.5);
+    margin: 2rem auto;
+    width: 25rem;
+    text-align: center;
+    color: #ffffff;
+    font-family: 'fornike365';
+    box-sizing: border-box;
+    padding: 1rem 2rem;
+    font-size: 0.85rem;
+}
+.rule{
+    font-size: 1.3rem;
+}
+.rule-content{
+    text-align: left;
+    line-height: 1.2rem;
+}
+.btn-style {
+    padding-top: 0.5rem;
+    box-sizing: border-box;
+    display: block;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 0 #eb5e0c;
+    border: 2px solid #ea5012;
+    width: 15rem;
+    height: 3.2rem;
+    line-height: 1.1rem;
+    border-radius: 10px;
+    text-align: center;
+    color: #fc5219;
+    font-family: 'fornike365';
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-style: oblique;
+    margin: 1.5rem auto 0;
+}
+.btn-style span{
+    font-size: 1rem;
+    font-family: 'fornike365';
+    font-style: oblique;
+    font-weight: 100;
+}
+.popup-box{
+    display: none;
+    position: relative;
+    margin: 2rem;
+    border:2px solid rgb(250, 107, 14);
+    background:rgba(255,255,255,0.9);
+    box-shadow:5px 5px 0 rgb(250, 107, 14);
+    padding: 1rem 2rem;
+    color: #f05f06;
+    text-align: center;
+    width: 22rem;
+    box-sizing: border-box;
+}
+.popup-box .close{
+    display: block;
+    position: absolute;
+    top:1rem;
+    right: 0.5rem;
+    font-size: 2rem;
+}
+.popup-box .title1{
+    font-size: 1.4rem;
+}
+.popup-box .title1 p{
+    font-family: 'fornike365';
+    font-size: 1rem;
+}
+.popup-box .upload-submit{
+    display: block;
+    background: #f05f06;
+    color: #fff;
+    width: 8rem;
+    margin: 0.5rem auto;
+    padding: 0.3rem 1.5rem 0.4rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px #e99d71;
+}
+.popup-box a p{
+    font-family: 'fornike365';
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+    font-style: oblique;
+}
+.popup-box .active{
+    background:#848181;
+}
+.popup-box label{
+    background: url(../img/upload-bg2.png)no-repeat;
+    background-size: contain;
+    background-position: center;
+    display: block;
+    width: 100%;
+    height: 12rem;
+    margin: 1rem auto;
+}
+.popup-box label .upload-img{
+    width: 100%;
+    overflow: scroll;
+    height: 10.2rem;
+    position: relative;
+}
+.popup-box input{
+    opacity: 0;
+}
+.popup_dialog {
+    display: none;
+}
+
+.popup_dialog p {
+    color: #fa6b0e;
+    font-size: 2.0rem;
+    /* font-weight: bold; */
+    line-height: 2rem;
+    text-align: center;
+}
+
+.popup_dialog p span {
+    display: block;
+    font-size: 1rem;
+    font-family: 'fornike365';
+}
+
+.popup_dialog .popup_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+.popup_dialog .popup_btn a {
+    display: block;
+    background: #fff;
+    /*font-weight: bold;*/
+    font-size: 1.3rem;
+    line-height: 1.2rem;
+    padding: 0.7rem 0 0.3rem;
+    width: 8rem;
+    border-radius: 15px;
+    border: 2px solid #fa6b0e;
+    box-shadow: 2px 3px #fa6b0e;
+    text-align: center;
+    color: #fa6b0e;
+    font-style: oblique;
+    margin: 0 1rem;
+}
+
+.popup_dialog .popup_btn span {
+    font-size: 1rem;
+    font-family: 'fornike365';
+}
