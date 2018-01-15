@@ -1,134 +1,4 @@
-<?php
 
-//ini_set("display_errors", "On");
-//error_reporting(E_ALL | E_STRICT);
-
-require_once "./header.php";
-$conn = connect_to_db();
-
-$apiStartTime = getMicrotime();
-$apiUrl = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER["REQUEST_URI"];
-$loginIP = getClientIP();
-$pagetype = 'team_member';
-
-$headerLocation = ''; //跳转地址
-$sql = "select * from dtc_join_user where openid = '$openid';";
-$result = mysql_query($sql, $conn);
-if (is_resource($result) && mysql_num_rows($result) != 0)
-{
-    $joinUserRow = mysql_fetch_assoc($result);
-    //进到首页，可简单判断，如果用户teamId不为-1且已确认开启任务且已绑定Nike+则留在本页面；其他情况统一交给join-choose处理
-    if ($joinUserRow['teamId'] != -1)
-    {
-        if ($joinUserRow['is_confirm'] != 1 || $_SESSION['userInfo']['isBindNike'] != 1)
-        {
-            $headerLocation = 'join-choose.php';
-
-        }
-    } else
-    {
-        $headerLocation = 'join-choose.php';
-    }
-}
-else
-{
-    echo "数据同步异常，请联系客服电话18514748838";
-    exit();
-}
-
-if ($headerLocation != '')
-{
-    //记录页面请求日志
-    $apiEndTime = getMicrotime();
-    $fetchTime = intval(($apiEndTime - $apiStartTime) * 1000);
-    $logArr = array(
-        'openid' => "$openid",
-        'type' => $pagetype,
-        'ip' => $loginIP,
-        'url' => $apiUrl,
-        'result' => mysql_real_escape_string($headerLocation),
-        'fetchTime' => $fetchTime,
-        'updateTime' => date("Y-m-d H:i:s", time()));
-
-    $insertkeysql = $insertvaluesql = $dot = '';
-    foreach ($logArr as $insert_key => $insert_value)
-    {
-        $insertkeysql .= $dot . $insert_key;
-        $insertvaluesql .= $dot . '\'' . $insert_value . '\'';
-        $dot = ', ';
-    }
-    $sql1 = 'insert into dtc_api_logs (' . $insertkeysql . ') values (' . $insertvaluesql . ')';
-    mysql_query($sql1, $conn);
-
-    header("Location:$headerLocation");
-
-    exit();
-}
-$sql3 = "select a.id,a.teamId,a.is_captain,b.teamName,b.department
-          from dtc_join_user a LEFT JOIN dtc_team b 
-          ON a.teamId = b.teamId
-          WHERE  a.openid='$openid' ";
-$result3 = mysql_query($sql3, $conn);
-$row3 = mysql_fetch_assoc($result3);
-$teamName = $row3['teamName'];
-$_SESSION['userInfo']['teamName'] = $teamName;
-
-$my_uid = $row3['id'];
-$teamId = $row3['teamId'];
-$is_captain =$row3['is_captain'];
-
-//以下构造用户情况
-$team_list = array();
-//取同一团队不同小组情况
-$sql = "select * from dtc_team where teamId = $teamId;";
-$ret = mysql_query($sql, $conn);
-$teams = array();
-while ($row = mysql_fetch_assoc($ret)) {
-    $department = $row['department'];
-    $teams[$department] = $row;
-}
-
-//取同一团队跑步数据
-$heroLists = array();
-$sql = "SELECT `openid`, sum(`long`) as longTotal, min(created) as created FROM yiqipao_member_project WHERE `pid`={$dtcPid} and teamId=$teamId group by openid ORDER BY sum(`long`) DESC, id asc;";
-$query = mysql_query($sql, $conn);
-while ($row = mysql_fetch_assoc($query))
-{
-    $heroOpenid = $row['openid'];
-    $heroLists[$heroOpenid] = $row;
-}
-
-$headImgList = array();
-$query = "select headimg,openid from yiqipao_member where teamId = $teamId";
-$result = mysql_query($query, $conn);
-while ($row = mysql_fetch_assoc($result)){
-    $heroOpenid = $row['openid'];
-    $headImgList[$heroOpenid] = $row;
-}
-
-//取本团队所有用户信息
-$sql = "select * from dtc_join_user where teamId = $teamId;";
-$ret = mysql_query($sql, $conn);
-while ($row = mysql_fetch_assoc($ret)) {
-    $heroOpenid = $row['openid'];
-    $department = $row['department'];
-    $row['teamNameEN'] = $teams[$department]['teamNameEN'];
-    $row['total'] = 0;
-    if(isset($heroLists[$heroOpenid]['longTotal']))
-    {
-        $row['total'] = $heroLists[$heroOpenid]['longTotal'];
-    }
-    if(isset($headImgList[$heroOpenid]['headimg']))
-    {
-        $row['headimg'] = $headImgList[$heroOpenid]['headimg'];
-    }
-
-    $team_list[] = $row;
-}
-//根据里程倒序
-$team_list = array_sort($team_list, 'total', $type = 'desc');
-
-?>
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -516,36 +386,31 @@ $team_list = array_sort($team_list, 'total', $type = 'desc');
     </head>
     <body>
     <div class="wrap rank">
-        <a class="home" href="main.php"><img src="./img/home.png" width="100%"></a>
-        <div class="title"><?php echo $teamName.'队'; ?></div>
+        <a class="home" href="main.html"><img src="./img/home.png" width="100%"></a>
+        <div class="title">跑跑跑队</div>
         <div class="tab-title" style="text-align: right;" data-t="2">
-            <?php if ($is_captain>0) {?>
                 <a class="manage manage-btn"><p class="manage-text">管理成员<br><span class="__span" style="font-size: 0.5rem">MANAGE TEAM MEMBER</span></p></a>
-            <?php }?>
         </div>
         <div class="tab-title active-1" style="text-align: right;height: 3rem" data-t="1"></div>
         <div class="box">
-            <?php if ($is_captain>0) {//是否是队长 ?>
+
                 <div class="tab_1" >
                     <div class="item_1 active" data-mid="1">待审核
                         <p class="tab_1-p"> TO BE CONFIRMED</p></div>
                     <div class="item_1" data-mid="2">全部成员
                         <p class="tab_1-p">ALL TEAM MEMBER</p></div>
                 </div>
-            <?php } ?>
-            <div class="tab-title <?php if ($is_captain>0) { echo "active-1";}?>" data-t="1">
+            <div class="tab-title active-1" data-t="1">
                 <div class="tab " >
                     <div class="item" style="width: 10rem; font-family: 'fornike365';">姓名/NAME</div>
                     <div class="item" style="width: 16rem; font-family: 'fornike365';">来自/FROM</div>
                 </div>
                 <ul class="list" >
-                    <?php
-                    foreach ($team_list as $key => $item_row) {
-                        if(!$item_row['is_captain'] && $item_row['is_allow'] == '0'){
-                            ?>
                             <li class="list-li newlist">
                                 <p class="name-1"><?php echo $item_row['fullname']; ?></p>
-                                <div style="width:12.2rem" > <p class="name-2"><?php echo is_numeric($item_row['department'])==1?$item_row['teamNameEN']:$item_row['department']; ?></p>
+                                <div style="width:12.2rem" >
+                                    <p class="name-2">
+                                        <?php echo is_numeric($item_row['department'])==1?$item_row['teamNameEN']:$item_row['department']; ?></p>
                                     <a class="checkbtn" check-list-key = "<?php echo $key ?>">审核</a></div>
                             </li>
                         <?php }} ?>
@@ -782,25 +647,3 @@ $team_list = array_sort($team_list, 'total', $type = 'desc');
     </script>
     </body>
     </html>
-<?php
-//记录页面请求日志
-
-$apiEndTime = getMicrotime();
-$fetchTime = intval(($apiEndTime - $apiStartTime) * 1000);
-$logArr = array(
-    'openid' => "$openid",
-    'type' => $pagetype,
-    'ip' => $loginIP,
-    'url' => $apiUrl,
-    'result' => mysql_real_escape_string(json_encode_cn($team_list)),
-    'fetchTime' => $fetchTime,
-    'updateTime' => date("Y-m-d H:i:s", time()));
-
-$insertkeysql = $insertvaluesql = $dot = '';
-foreach ($logArr as $insert_key => $insert_value) {
-    $insertkeysql .= $dot . $insert_key;
-    $insertvaluesql .= $dot . '\'' . $insert_value . '\'';
-    $dot = ', ';
-}
-$sql1 = 'insert into dtc_api_logs (' . $insertkeysql . ') values (' . $insertvaluesql . ')';
-mysql_query($sql1, $conn);
