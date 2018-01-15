@@ -23,11 +23,11 @@ if (is_resource($result) && mysql_num_rows($result) != 0) {
     //进到首页，可简单判断，如果用户teamId不为-1且已确认开启任务且已绑定Nike+则留在本页面；其他情况统一交给join-choose处理
     if ($joinUserRow['teamId'] != -1) {
         if ($joinUserRow['is_confirm'] != 1 || $_SESSION['userInfo']['isBindNike'] != 1) {
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
 
         }
     } else {
-        $headerLocation = 'join-choose.php';
+        $headerLocation = 'join-choose.html';
     }
 } else {
     echo "数据同步异常，请联系客服电话18514748838";

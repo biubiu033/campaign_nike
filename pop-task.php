@@ -22,7 +22,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
     {
         if ($joinUserRow['is_confirm'] != 1 || $_SESSION['userInfo']['isBindNike'] != 1)
         {
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
         }else{
             if(isset($_GET['type'])){
                 $date=$_GET['type'];
@@ -48,7 +48,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
         }
     } else
     {
-        $headerLocation = 'join-choose.php';
+        $headerLocation = 'join-choose.html';
     }
 }
 else

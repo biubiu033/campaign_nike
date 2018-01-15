@@ -83,7 +83,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
             //            echo $query;
         } else
         {
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
         }
     }
 } else
@@ -300,7 +300,7 @@ $captainName = trim($captainName, ' / ');
             </div>
         </div>
         <div class="confirm-bt" style="margin-top: 2rem;">
-            <a class="bt-back" href="join-choose.php?is_allow=-1">返回<br><span>BACK</span></a>
+            <a class="bt-back" href="join-choose.html?is_allow=-1">返回<br><span>BACK</span></a>
         </div>
     </div>
     <?php

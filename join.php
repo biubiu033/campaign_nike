@@ -1,95 +1,5 @@
 <?php
-require_once "./header.php";
-$conn = connect_to_db();
-
-$apiStartTime = getMicrotime();
-$apiUrl = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER["REQUEST_URI"];
-$loginIP = getClientIP();
-$pageType = 'join_dtc';
-
-$headerLocation = ''; //跳转地址
-$sql = "select * from dtc_join_user where openid = '$openid';";
-$result = mysql_query($sql, $conn);
-if (is_resource($result) && mysql_num_rows($result) != 0)
-{
-    $joinUserRow = mysql_fetch_assoc($result);
-    //看用户是否已经加入团队并写了相关信息
-    if ($joinUserRow['teamId'] != -1)
-    {
-        //看用户是否是队长
-        if ($joinUserRow['is_captain'] == 1)
-        {
-            //是队长看团队情况
-            $teamId = $joinUserRow['teamId'];
-            $sql1 = "select * from dtc_team where teamId = $teamId;";
-            $result1 = mysql_query($sql1, $conn);
-            if (is_resource($result1) && mysql_num_rows($result1) != 0)
-            {
-                $row1 = mysql_fetch_assoc($result1);
-                if ($row1['is_input'] < 1)
-                {
-                    //团队名字没起好，跳到团队起名字页面
-                    $headerLocation = 'nominate.php';
-                }else{
-                    $headerLocation = 'main.php';  //队长进来干什么
-                }
-            }
-        }
-        else
-        {
-            //队员看是否由队长审核通过
-            if ($joinUserRow['is_allow'] == 1 && $_SESSION['userInfo']['isBindNike'] == 1)
-            {
-                //已确认开启且绑定过nike，则跳到main.php
-                $headerLocation = 'main.php';
-            } elseif($joinUserRow['is_allow'] != -1)
-            {
-                //其他情况则跳转到等待队长审核页面
-                $headerLocation = 'confirm.php';
-            }
-        }
-    } else
-    {
-    }
-}
-else
-{
-    echo "数据同步异常，请联系客服电话18514748838";
-    exit();
-}
-
-if ($headerLocation != '')
-{
-    //记录页面请求日志
-    $apiEndTime = getMicrotime();
-    $fetchTime = intval(($apiEndTime - $apiStartTime) * 1000);
-    $logArr = array(
-        'openid' => "$openid",
-        'type' => $pageType,
-        'ip' => $loginIP,
-        'url' => $apiUrl,
-        'result' => mysql_real_escape_string($headerLocation),
-        'fetchTime' => $fetchTime,
-        'updateTime' => date("Y-m-d H:i:s", time()));
-
-    $insertkeysql = $insertvaluesql = $dot = '';
-    foreach ($logArr as $insert_key => $insert_value)
-    {
-        $insertkeysql .= $dot . $insert_key;
-        $insertvaluesql .= $dot . '\'' . $insert_value . '\'';
-        $dot = ', ';
-    }
-    $sql1 = 'insert into dtc_api_logs (' . $insertkeysql . ') values (' . $insertvaluesql . ')';
-    mysql_query($sql1, $conn);
-
-    header("Location:$headerLocation");
-
-    exit();
-}
-
 $type = isset($_GET['type']) ? $_GET['type'] : 1;
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,166 +14,15 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
     <link rel="stylesheet" href="css/main.css?a=123"/>
     <!--引入自己的Js-->
     <script src="js/responsive.js"></script>
-
     <!--引用Jquery-->
     <title>里享</title>
     <style>
-/*        .join[name="join"] {
-            background: url(./img/bg.png) no-repeat;
-            background-size: cover;
-            min-height: 44.3rem;
-            font-family: "Microsoft YaHei", sans-serif;
-            box-sizing: border-box;
-            padding: 1rem 2.5rem 1rem;
-            overflow-x: hidden;
-        }*/
-
-/*        .join[name="join"] .title {
-            background: url(./img/join-title.png) no-repeat;
-            background-size: contain;
-            background-position: center;
-            margin: 0 auto;
-            height: 7rem;
-            width: 23rem;
-            box-sizing: border-box;
-        }*/
-
-/*        .join[name="join"] .join-input {
-            background: rgba(255, 255, 255, 0.8);
-            border: 2px solid #fa6810;
-            box-shadow: 4px 4px #fa6810;
-            margin: 0.6rem auto;
-            box-sizing: border-box;
-            padding: 1rem 2rem 0.5rem;
-            box-sizing: border-box;
-        }*/
-/*
-        .join[name="join"] .team {
-            margin-bottom: 1rem;
-            position: relative;
-        }*/
-
         .join[name="join"] .team input:disabled {
             box-sizing: border-box;
             background-color: #fef1e1;
             color: #000;
             opacity: 1;
         }
-
-       /* .join[name="join"] .team ul {
-            display: none;
-            position: absolute;
-            background: #fa6810;
-            color: #fff;
-            width: 100%;
-            left: 0;
-            bottom: -5.2rem;
-            padding: 0.5rem 1.5rem;
-            box-sizing: border-box;
-            z-index: 1;
-            font-size: 0.8rem;
-        }*/
-
-/*        .join[name="join"] .team ul li {
-            padding: 0.2rem 0;
-        }*/
-
- /*       .join[name="join"] .team ul li:not(:last-child) {
-            border-bottom: 1px solid #fff;
-        }*/
-
-/*        .join[name="join"] h1 {
-            text-align: center;
-            font-size: 1rem;
-            font-weight: bold;
-            line-height: 1rem;
-            font-style: oblique;
-            color: #fa6b0e;
-        }*/
-
-/*        .join[name="join"] h1 span {
-            font-size: 0.7rem;
-            font-family: futurabt;
-            font-weight: 100;
-        }*/
-
-       /* .join[name="join"] .team-code, .employee-code {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.4);
-            border: 2px solid #fa6810;
-            padding: 0.65rem;
-            margin-top: 0.5rem;
-            box-sizing: border-box;
-        }*/
-
-/*        .join[name="join"] input {
-            display: block;
-            border: none;
-            background: none;
-            outline: none;
-            font-size: 1.0rem;
-            !*text-align: center;*!
-            width: 100%;
-            box-sizing: border-box;
-        }*/
-
-   /*     ::-webkit-input-placeholder { !* WebKit browsers *!
-            color: #fa6710;
-            opacity: 0.5;
-            font-size: 1rem;
-        }*/
-/*        .input-icon:before {
-            content: '';
-            !*display: inline-block;*!
-            background: url(./img/input-icon.png) center center no-repeat;
-            background-size: contain;
-            width: 1.5rem;
-            height: 1.5rem;
-            margin: 0 0.4rem -0.28rem 0;
-        }*/
-
-/*        .down-icon:after {
-            content: '';
-            display: block;
-            background: url(./img/icon-down.png) center center no-repeat;
-            background-size: contain;
-            width: 1rem;
-            height: 1rem;
-        }
-
-        .join[name="join"] .warn {
-            text-align: center;
-            color: #fa6b0e;
-            font-size: 0.8rem;
-            margin-top: 0.2rem;
-        }*/
-
-       /* .join[name="join"] .compete {
-            display: block;
-            background: rgba(255, 255, 255, 0.8);
-            font-weight: bold;
-            font-size: 1.2rem;
-            line-height: 1rem;
-            font-family: "Microsoft YaHei", sans-serif;
-            margin: 0 auto;
-            padding: 0.5rem 0 0.1rem;
-            width: 10rem;
-            border-radius: 10px;
-            border: 2px solid #e1520a;
-            box-shadow: 2px 2px #e1520a;
-            text-align: center;
-            color: #fa6b0e;
-            font-style: oblique;
-        }*/
-
- /*       .join[name="join"] .compete span {
-            font-size: 0.8rem;
-            font-family: futurabt;
-            !*   font-weight: 100;*!
-        }*/
-
         .wrong {
             font-size: 0.8rem;
             color: red;
@@ -388,8 +147,6 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 <script src="//cdn.bootcss.com/jquery/1.11.0/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"></script>
 <script src="js/jquery.bpopup.js"></script>
-
-
 <script src="js/verify.js"></script>
 <script>
     (function () {
@@ -484,29 +241,4 @@ $type = isset($_GET['type']) ? $_GET['type'] : 1;
 
     })();
 </script>
-<?php include "share_dtc.php"; ?>
 </html>
-
-<?php
-//记录页面请求日志
-$apiEndTime = getMicrotime();
-$fetchTime = intval(($apiEndTime - $apiStartTime) * 1000);
-$logArr = array(
-    'openid' => "$openid",
-    'type' => $pageType,
-    'ip' => $loginIP,
-    'url' => $apiUrl,
-    'result' => mysql_real_escape_string(json_encode_cn($joinUserRow)),
-    'fetchTime' => $fetchTime,
-    'updateTime' => date("Y-m-d H:i:s", time()));
-
-$insertkeysql = $insertvaluesql = $dot = '';
-foreach ($logArr as $insert_key => $insert_value) {
-    $insertkeysql .= $dot . $insert_key;
-    $insertvaluesql .= $dot . '\'' . $insert_value . '\'';
-    $dot = ', ';
-}
-$sql1 = 'insert into dtc_api_logs (' . $insertkeysql . ') values (' . $insertvaluesql . ')';
-mysql_query($sql1, $conn);
-
-?>

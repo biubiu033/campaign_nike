@@ -52,7 +52,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
         {
             $headerLocation = 'confirm.php';  //todo：如果是被队长拒绝了，就再也不能注册了
         }else{
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
         }
     }
 }

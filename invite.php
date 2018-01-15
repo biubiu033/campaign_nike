@@ -120,7 +120,7 @@ $your_course = intval($row1['total']);
             <?php echo emoji_unified_to_html(getSubstr($srcNickname, 12, '...')); ?>为公益挑战赛助力<?php echo $your_course ?>公里<br>
             <p>YOUR FRIEND HAVE RUN  <?php echo $your_course ?> KM</p>
         </div>
-        <a class="share-btn" href="join-choose.php"></a>
+        <a class="share-btn" href="join-choose.html"></a>
     </div>
 </div>
 <!--<div class="popup-share close">-->

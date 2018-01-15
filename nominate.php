@@ -35,12 +35,12 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
         } else
         {
             //非队长，交给join-choose处理
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
         }
     } else
     {
         //团队未设置，交给join-choose处理
-        $headerLocation = 'join-choose.php';
+        $headerLocation = 'join-choose.html';
     }
 }
 else

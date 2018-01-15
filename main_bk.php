@@ -20,8 +20,8 @@ if(isset($_SESSION['userInfo']) && $_SESSION['userInfo']['isBindNike']!=1){
     }
     else
     {
-        header("Location:join-choose.php"); 
-        $pageResult = 'Location:join-choose.php';   
+        header("Location:join-choose.html");
+        $pageResult = 'Location:join-choose.html';
     }
     
     //记录页面请求日志
@@ -75,8 +75,8 @@ else
     else
     {
         //未选择组，去选择项目
-        header("Location:join-choose.php"); 
-        $pageResult = 'Location:join-choose.php';
+        header("Location:join-choose.html");
+        $pageResult = 'Location:join-choose.html';
         exit();   
     }    
 }

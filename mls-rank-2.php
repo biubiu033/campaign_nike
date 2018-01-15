@@ -22,7 +22,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
     {
         if ($joinUserRow['is_confirm'] != 1 || $_SESSION['userInfo']['isBindNike'] != 1)
         {
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
         }else{
             $query = "SELECT * FROM dtc_taskone_marathon WHERE openid='$openid' LIMIT 1";
             $result = mysql_query($query,$conn);
@@ -32,7 +32,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
         }
     } else
     {
-        $headerLocation = 'join-choose.php';
+        $headerLocation = 'join-choose.html';
     }
 }
 else

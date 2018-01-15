@@ -217,7 +217,7 @@ if (isset($_GET['name']) && isset($_GET['employ']) && isset($_GET['phone']) &&
             $templateMsg['data']['remark'] = array("value" => "\n快去看看吧！", 'color' =>
                     "#000000");
             $templateMsg['url'] =
-                "http://www.makeyourruncount.com/campaign_nike/running/dtc/join-choose.php";
+                "http://www.makeyourruncount.com/campaign_nike/running/dtc/join-choose.html";
 
 
             $postContent = json_encode_cn($templateMsg);

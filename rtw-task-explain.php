@@ -19,12 +19,12 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
     {
         if ($joinUserRow['is_confirm'] != 1 || $_SESSION['userInfo']['isBindNike'] != 1)
         {
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
 
         }
     } else
     {
-        $headerLocation = 'join-choose.php';
+        $headerLocation = 'join-choose.html';
     }
 }
 else

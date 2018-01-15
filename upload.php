@@ -52,7 +52,7 @@ if (is_resource($result) && mysql_num_rows($result) != 0)
         {
             $headerLocation = 'confirm.php';  //
         }else{
-            $headerLocation = 'join-choose.php';
+            $headerLocation = 'join-choose.html';
         }
     }
 }
